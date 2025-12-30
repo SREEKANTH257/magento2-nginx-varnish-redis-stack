@@ -1,8 +1,6 @@
-````markdown
 # Magento 2 Server Setup
 
-## **Server Details**
-
+##  Server Details
 - **Server:** AWS `ip-172-31-27-117`  
 - **User:** `test-ssh`  
 - **Domain:** `test.mgt.com`  
@@ -10,24 +8,26 @@
 
 ---
 
-## **Stack Installed**
-
+##  Stack Installed
+- **OS:** Debian 12  
 - **PHP:** 8.3  
 - **MySQL:** 8  
-- **NGINX**: 1.22  
-- **Redis**: Server for cache & session  
-- **Elasticsearch**: Magento search  
-- **Varnish**: Full-page caching  
+- **NGINX:** 1.22  
+- **Redis:** Cache & Session storage  
+- **Elasticsearch:** Magento search indexing  
+- **Varnish:** Full-page caching (bonus)  
 - **SSL:** Self-signed certificate  
 
 ---
 
-## **Setup Steps**
+##  Setup Steps
 
-### **1. Base System**
+### 1. Base System
 ```bash
 sudo apt update
-sudo apt install -y php8.3-fpm php8.3-mysql php8.3-curl php8.3-gd php8.3-mbstring nginx mysql-server redis-server elasticsearch
+sudo apt install -y php8.3-fpm php8.3-mysql php8.3-curl php8.3-gd php8.3-mbstring \
+nginx mysql-server redis-server elasticsearch
+
 ````
 
 ### **2. Magento Installation**
@@ -48,6 +48,15 @@ sudo tee /etc/php/8.3/fpm/pool.d/magento.conf << 'EOF'
 [magento]
 user = test-ssh
 group = clp
+db-name=magento2 \
+db-user=magentouser \
+db-password=Admin@123 \
+admin-firstname=Admin \
+admin-lastname=User \
+admin-email=admin@example.com \
+admin-user=admin \
+admin-password=Admin@123! \
+language=en_US \
 listen = /run/php/php8.3-fpm-magento.sock
 listen.owner = test-ssh
 listen.group = clp
