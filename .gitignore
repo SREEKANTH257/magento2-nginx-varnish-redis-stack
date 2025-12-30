@@ -1,0 +1,14 @@
+# Ignore private keys and certs
+*.key
+*.crt
+*.pem
+
+# Ignore Magento runtime files
+var/
+pub/media/
+pub/static/
+generated/
+
+# Ignore system files
+/etc/mysql/*
+/var/lib/mysql/*
