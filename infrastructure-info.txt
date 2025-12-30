@@ -1,0 +1,85 @@
+=== Project Information ===
+Project Name: Magento Server Setup
+Environment: Development / Staging
+Maintainer: test-ssh
+Date: 2025-12-30
+
+=== 1. Operating System ===
+OS: Debian 12 (bookworm)
+Package Manager: APT (.deb packages)
+
+=== 2. Web Server ===
+Nginx Version: 1.22.1
+Nginx User: test-ssh
+Config Path: /etc/nginx/sites-available/magento.conf
+
+=== 3. PHP ===
+PHP Version: 8.3
+PHP-FPM Pools:
+  - magento
+  - www
+Socket Path: /run/php/php8.3-fpm-magento.sock
+
+=== 4. Database ===
+MySQL Version: 8.0.44  
+Databases Configured: magento
+
+=== 5. Cache & Queue ===
+Redis Version: 7.0.15 (run `redis-server --version`)
+Redis Keyspace:
+  db0: keys=144, expires=48
+  db1: keys=25, expires=1
+  db2: keys=1, expires=1
+Varnish Version: 7.1.1 (run `varnishd -V`)
+Varnish Status: running
+
+=== 6. Magento ===
+Magento Version: Magento CLI 2.4.8-p3 (run `bin/magento --version` in Magento root)
+Magento Root Path: /var/www/magento
+
+=== 7. Domains / Hosts ===
+- test.mgt.com -> 127.0.0.1
+- pma.mgt.com -> 127.0.0.1
+
+=== 8. SSL / Frontend ===
+Frontend Status: HTTPS 200 OK (HTTP/2)
+Redirect Status: HTTP 200 OK
+Certificate: (assume self-signed or Let’s Encrypt if available)
+Headers: X-Magento-Cache-Debug: MISS
+
+=== 9. Processes ===
+Key Processes Running:
+- php-fpm pool magento
+- nginx worker processes
+- MySQL server (mysqld)
+- Redis server (redis-server)
+- Varnish cache (varnishd)
+
+=== 10. Project Files / Structure ===
+magento-server-setup/
+├── hosts
+├── magento-setup.docx
+├── magento.conf
+├── nginx.conf
+├── scripts/
+│   ├── setup.sh
+│   └── validate.sh
+├── test.mgt.com
+└── validations.txt
+
+=== 11. Notes / Remarks ===
+- PHP-FPM, Nginx, Redis, MySQL, and Varnish active and running.
+- Nginx user is `test-ssh`.
+- SSL configured for test.mgt.com.
+- Debian 12 "Bookworm" OS confirmed.
+
+=== 12. AWS Infrastructure ===
+Instance Type: t m7i-flex.large
+vCPUs: 2 
+RAM: 7.6 GiB 
+Disk Size:  256 GB (`nvme0n1`)
+Swap:	16 GiB (`/swapfile`, 180 MiB used)
+Region / AZ: us-east-2b 
+AMI:ami-07e8b0a2f418001aa
+Public IP: 3.17.132.8 
+Private IP: 172.31.27.xx7 
