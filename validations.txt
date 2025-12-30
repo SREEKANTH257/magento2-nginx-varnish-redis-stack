@@ -1,0 +1,8 @@
+echo "=== 1. Services ==="; systemctl status php8.3-fpm nginx redis-server | head -20
+echo "=== 2. Frontend ==="; curl -Ik https://test.mgt.com | head -15
+echo "=== 3. Redirect ==="; curl -I http://test.mgt.com
+echo "=== 4. Redis ==="; redis-cli info keyspace
+echo "=== 5. Processes ==="; ps aux | grep -E 'nginx|php-fpm' | grep test-ssh
+echo "=== 6. Socket ==="; ls -l /run/php/php8.3-fpm-magento.sock
+echo "=== 7. Hosts ==="; cat /etc/hosts | grep mgt.com
+echo "=== 8. NGINX User ==="; grep "^user" /etc/nginx/nginx.conf
