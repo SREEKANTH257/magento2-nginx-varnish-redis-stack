@@ -1,5 +1,5 @@
 # Magento 2 Server Setup
-
+Magento 2 Installation & Configuration on Debian 12 with NGINX, Redis, Varnish, and SSL
 ##  Server Details
 - **Server:** AWS `ip-172-31-27-117`  
 - **User:** `test-ssh`  
