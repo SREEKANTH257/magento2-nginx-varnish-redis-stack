@@ -1,5 +1,3 @@
----
-
 ````markdown
 # Magento 2 Server Setup
 
